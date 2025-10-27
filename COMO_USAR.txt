@@ -1,0 +1,113 @@
+╔══════════════════════════════════════════════════════════════════╗
+║                                                                  ║
+║          SISTEMA DE CONTROLE DE AULAS - GUIA RÁPIDO            ║
+║                                                                  ║
+╚══════════════════════════════════════════════════════════════════╝
+
+🎉 ÓTIMA NOTÍCIA: NÃO PRECISA INSTALAR NADA!
+
+═══════════════════════════════════════════════════════════════════
+
+📖 COMO ABRIR O SISTEMA:
+
+1. Vá na pasta: "public"
+
+2. Clique DUAS VEZES no arquivo: "index.html"
+
+3. O sistema abrirá no seu navegador!
+
+═══════════════════════════════════════════════════════════════════
+
+✅ COMO USAR:
+
+ABA 1: CADASTROS
+----------------
+• Preencha os 4 campos:
+  - Turma (ex: "Turma A")
+  - Professor (ex: "João Silva")
+  - Disciplina (ex: "Matemática")
+  - Sala (ex: "Sala 101")
+
+• Clique em "✅ Adicionar Todos os Dados"
+
+• Pronto! Os dados aparecem nas listas abaixo
+
+
+ABA 2: ESCALA DE AULAS
+-----------------------
+• Selecione nos menus:
+  - Turma
+  - Professor
+  - Disciplina
+  - Sala
+  - Dia da semana
+
+• Digite os horários (ex: 08:00 - 10:00)
+
+• Marque as semanas (1ª, 2ª, 3ª, 4ª)
+
+• Clique em "Cadastrar Aula"
+
+
+ABA 3: RELATÓRIOS
+-----------------
+• Para gerar relatório mensal:
+  - Escolha mês e ano
+  - Clique em "📄 Gerar Relatório TXT"
+  - O arquivo será baixado
+
+• Para fazer backup:
+  - Clique em "📥 Baixar dados.json"
+  - Guarde este arquivo em local seguro!
+
+═══════════════════════════════════════════════════════════════════
+
+💾 IMPORTANTE - BACKUP DOS DADOS:
+
+Os dados ficam salvos no navegador automaticamente, MAS:
+
+⚠️  Se você limpar o cache do navegador, os dados serão perdidos!
+
+✅  SOLUÇÃO: Baixe o "dados.json" regularmente na aba Relatórios
+
+═══════════════════════════════════════════════════════════════════
+
+🔧 PROBLEMAS?
+
+• Sistema não abre?
+  → Tente arrastar o "index.html" para o navegador
+  → Ou clique com botão direito > Abrir com > Chrome/Edge
+
+• Dados sumiram?
+  → Você limpou o cache do navegador?
+  → Use sempre o mesmo navegador
+  → Faça backup do JSON!
+
+• Botão não funciona?
+  → Pressione F12 e veja se há erros no Console
+  → Verifique se os 3 arquivos estão na pasta "public"
+
+═══════════════════════════════════════════════════════════════════
+
+📁 ARQUIVOS NECESSÁRIOS (na pasta "public"):
+
+✓ index.html   ← Abra este arquivo
+✓ app.js       ← Não mexa
+✓ styles.css   ← Não mexa
+
+═══════════════════════════════════════════════════════════════════
+
+🎯 DICAS:
+
+• Use sempre o MESMO navegador para não perder dados
+• Faça backup do JSON toda semana
+• Não precisa de internet para funcionar
+• Pode copiar a pasta "public" para outro computador
+
+═══════════════════════════════════════════════════════════════════
+
+✨ PRONTO! É SÓ ISSO!
+
+Abra o "public/index.html" e comece a usar! 🚀
+
+═══════════════════════════════════════════════════════════════════
