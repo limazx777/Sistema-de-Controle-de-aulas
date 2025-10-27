@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Controle de Aulas</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="logoilede.png" alt="Logo ILEDE" class="logo">
+            <div class="header-text">
+                <h1>Sistema de Controle de Aulas</h1>
+                <p class="subtitle">ILEDE - Educação Sem Fronteiras</p>
+            </div>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" data-tab="cadastros">Cadastros</button>
+            <button class="tab-btn" data-tab="aulas">Escala de Aulas</button>
+            <button class="tab-btn" data-tab="relatorios">Relatórios</button>
+            <button class="tab-btn" data-tab="whatsapp">📱 WhatsApp</button>
+        </nav>
+
+        <!-- TAB: CADASTROS -->
+        <div id="cadastros" class="tab-content active">
+            <div class="card">
+                <h2>📝 Cadastrar Dados Completos</h2>
+                <p style="margin-bottom: 15px; color: #6c757d; font-size: 0.9em;">
+                    💡 <strong>Dica:</strong> Clique no botão ✏️ ao lado de qualquer item para editá-lo. Use <strong>Enter</strong> para salvar ou <strong>Esc</strong> para cancelar.
+                </p>
+                <form id="form-cadastro-completo">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="input-turma">🎓 Turma:</label>
+                            <input type="text" id="input-turma" placeholder="Nome da turma" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="input-professor">👨‍🏫 Professor:</label>
+                            <input type="text" id="input-professor" placeholder="Nome do professor" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="input-disciplina">📖 Disciplina:</label>
+                            <input type="text" id="input-disciplina" placeholder="Nome da disciplina" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="input-sala">🚪 Sala:</label>
+                            <input type="text" id="input-sala" placeholder="Nome/Número da sala" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">✅ Adicionar Todos os Dados</button>
+                </form>
+            </div>
+
+            <div class="grid-2">
+                <!-- TURMAS -->
+                <div class="card">
+                    <h2>🎓 Turmas Cadastradas</h2>
+                    <ul id="lista-turmas" class="lista"></ul>
+                </div>
+
+                <!-- PROFESSORES -->
+                <div class="card">
+                    <h2>👨‍🏫 Professores Cadastrados</h2>
+                    <ul id="lista-professores" class="lista"></ul>
+                </div>
+
+                <!-- DISCIPLINAS -->
+                <div class="card">
+                    <h2>📖 Disciplinas Cadastradas</h2>
+                    <ul id="lista-disciplinas" class="lista"></ul>
+                </div>
+
+                <!-- SALAS -->
+                <div class="card">
+                    <h2>🚪 Salas Cadastradas</h2>
+                    <ul id="lista-salas" class="lista"></ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB: AULAS -->
+        <div id="aulas" class="tab-content">
+            <div class="card">
+                <h2>📅 Cadastrar Aula na Escala</h2>
+                <form id="form-aula">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="aula-turma">Turma:</label>
+                            <select id="aula-turma" required>
+                                <option value="">Selecione uma turma</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="aula-professor">Professor:</label>
+                            <select id="aula-professor" required>
+                                <option value="">Selecione um professor</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="aula-disciplina">Disciplina:</label>
+                            <select id="aula-disciplina" required>
+                                <option value="">Selecione uma disciplina</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="aula-sala">Sala:</label>
+                            <select id="aula-sala" required>
+                                <option value="">Selecione uma sala</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="aula-dia">Dia da Semana:</label>
+                            <select id="aula-dia" required>
+                                <option value="">Selecione o dia</option>
+                                <option value="Segunda-feira">Segunda-feira</option>
+                                <option value="Terça-feira">Terça-feira</option>
+                                <option value="Quarta-feira">Quarta-feira</option>
+                                <option value="Quinta-feira">Quinta-feira</option>
+                                <option value="Sexta-feira">Sexta-feira</option>
+                                <option value="Sábado">Sábado</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="aula-inicio">Horário Início:</label>
+                            <input type="time" id="aula-inicio" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="aula-fim">Horário Fim:</label>
+                            <input type="time" id="aula-fim" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="aula-horas-mes">⏱️ Total de Horas do Mês:</label>
+                            <input type="number" id="aula-horas-mes" min="0" step="0.5" placeholder="Ex: 16" required>
+                            <small style="color: #6c757d; font-size: 0.85em;">Total de horas trabalhadas no mês</small>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Semanas do Mês:</label>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" value="1ª" checked> 1ª Semana</label>
+                                <label><input type="checkbox" value="2ª" checked> 2ª Semana</label>
+                                <label><input type="checkbox" value="3ª" checked> 3ª Semana</label>
+                                <label><input type="checkbox" value="4ª" checked> 4ª Semana</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">Cadastrar Aula</button>
+                    <button type="button" onclick="cancelarEdicao()" class="btn-secondary" style="display: none; margin-left: 10px;">❌ Cancelar Edição</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>📋 Aulas Cadastradas</h2>
+                <div id="lista-aulas-cadastradas"></div>
+            </div>
+        </div>
+
+        <!-- TAB: RELATÓRIOS -->
+        <div id="relatorios" class="tab-content">
+            <div class="card">
+                <h2>📊 Gerar Relatório Mensal</h2>
+                <form id="form-relatorio">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="relatorio-mes">Mês:</label>
+                            <select id="relatorio-mes" required>
+                                <option value="01">Janeiro</option>
+                                <option value="02">Fevereiro</option>
+                                <option value="03">Março</option>
+                                <option value="04">Abril</option>
+                                <option value="05">Maio</option>
+                                <option value="06">Junho</option>
+                                <option value="07">Julho</option>
+                                <option value="08">Agosto</option>
+                                <option value="09">Setembro</option>
+                                <option value="10">Outubro</option>
+                                <option value="11">Novembro</option>
+                                <option value="12">Dezembro</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="relatorio-ano">Ano:</label>
+                            <input type="number" id="relatorio-ano" min="2020" max="2030" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-primary">📊 Gerar Relatório Excel</button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>💾 Exportar/Importar Dados</h2>
+                <p style="margin-bottom: 15px; color: #6c757d;">Baixe todos os dados cadastrados em formato JSON ou importe dados de um arquivo JSON</p>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <button onclick="downloadJsonFile()" class="btn-primary">📥 Baixar dados.json</button>
+                    <button onclick="importJsonFile()" class="btn-primary">📤 Importar dados.json</button>
+                </div>
+                <input type="file" id="json-file-input" accept=".json" style="display: none;" onchange="handleJsonFileImport(event)">
+            </div>
+            
+            <div class="card">
+                <h2>📋 Exportar Planilha Completa</h2>
+                <p style="margin-bottom: 15px; color: #6c757d;">Baixe uma planilha Excel com todas as aulas cadastradas</p>
+                <button onclick="exportarPlanilhaCompleta()" class="btn-primary">📊 Exportar Todas as Aulas (Excel)</button>
+            </div>
+            
+            <div class="card">
+                <h2>📱 Enviar para WhatsApp</h2>
+                <p style="margin-bottom: 15px; color: #6c757d;">Envie informações das aulas para o WhatsApp</p>
+                <button onclick="enviarTodasAulasWhatsApp()" class="btn-whatsapp">📱 Enviar Todas as Aulas para WhatsApp</button>
+                <p style="margin-top: 10px; font-size: 0.9em; color: #6c757d;">💡 Cada aula será enviada individualmente com suas informações completas</p>
+            </div>
+        </div>
+
+        <!-- TAB: WHATSAPP -->
+        <div id="whatsapp" class="tab-content">
+            <div class="card">
+                <h2>📱 Configuração do WhatsApp</h2>
+                <p style="margin-bottom: 15px; color: #6c757d;">Conecte seu WhatsApp para enviar relatórios e mensagens automaticamente</p>
+                
+                <div id="whatsapp-status" class="status-display">
+                    <span class="status-indicator" id="whatsapp-indicator">🔴</span>
+                    <span id="whatsapp-status-text">Desconectado</span>
+                </div>
+
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px;">
+                    <button onclick="conectarWhatsApp()" class="btn-primary" id="btn-conectar">🔗 Conectar WhatsApp</button>
+                    <button onclick="desconectarWhatsApp()" class="btn-secondary" id="btn-desconectar" disabled>📴 Desconectar</button>
+                    <button onclick="testarWhatsApp()" class="btn-success" id="btn-teste" disabled>🧪 Testar Conexão</button>
+                </div>
+
+                <div id="qr-code-container" style="display: none; margin-top: 20px; text-align: center;">
+                    <h3>📱 Escaneie o QR Code</h3>
+                    <p style="color: #6c757d; margin-bottom: 15px;">Abra o WhatsApp no seu celular e escaneie o código abaixo:</p>
+                    <div id="qr-code-display" style="background: white; padding: 20px; border-radius: 10px; display: inline-block;"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>📤 Enviar Relatório de Aula</h2>
+                <p style="margin-bottom: 15px; color: #6c757d;">Envie um relatório detalhado de uma aula específica via WhatsApp</p>
+                
+                <form id="form-enviar-relatorio">
+                    <div class="form-group">
+                        <label for="telefone-relatorio">📱 Número do WhatsApp:</label>
+                        <input type="text" id="telefone-relatorio" placeholder="Ex: 11999999999" required>
+                        <small style="color: #6c757d;">Digite apenas números (ex: 11999999999)</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="aula-relatorio">📚 Selecionar Aula:</label>
+                        <select id="aula-relatorio" required>
+                            <option value="">Selecione uma aula...</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn-whatsapp" id="btn-enviar-relatorio" disabled>
+                        📤 Enviar Relatório com PDF
+                    </button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>💬 Enviar Mensagem Personalizada</h2>
+                <p style="margin-bottom: 15px; color: #6c757d;">Envie uma mensagem personalizada</p>
+                
+                <form id="form-mensagem-personalizada">
+                    <div class="form-group">
+                        <label for="telefone-mensagem">📱 Número do WhatsApp:</label>
+                        <input type="text" id="telefone-mensagem" placeholder="Ex: 11999999999" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mensagem-texto">💬 Mensagem:</label>
+                        <textarea id="mensagem-texto" rows="4" placeholder="Digite sua mensagem aqui..." required></textarea>
+                        <small style="color: #6c757d;">Use *texto* para negrito, _texto_ para itálico</small>
+                    </div>
+
+                    <button type="submit" class="btn-primary" id="btn-enviar-mensagem" disabled>
+                        📤 Enviar Mensagem
+                    </button>
+                </form>
+            </div>
+
+            <div class="card">
+                <h2>📋 Enviar Todas as Aulas</h2>
+                <p style="margin-bottom: 15px; color: #6c757d;">Envie relatórios de todas as aulas cadastradas</p>
+                
+                <form id="form-enviar-todas">
+                    <div class="form-group">
+                        <label for="telefone-todas">📱 Número do WhatsApp:</label>
+                        <input type="text" id="telefone-todas" placeholder="Ex: 11999999999" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="incluir-pdf" checked> 
+                            📎 Incluir PDFs dos relatórios
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-whatsapp" id="btn-enviar-todas" disabled>
+                        📤 Enviar Todas as Aulas
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
